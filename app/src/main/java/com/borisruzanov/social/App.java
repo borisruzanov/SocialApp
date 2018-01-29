@@ -17,7 +17,9 @@ public class App extends Application {
 
         //Creating Dagger main component for the whole application
         //Define module for this component as AppContextModule.java
-        graph = DaggerAppComponent.builder().appContextModule(new AppContextModule(getApplicationContext())).build();
+        graph = DaggerAppComponent.builder().appContextModule(new AppContextModule(this)).build();
     }
+
+
 
 }

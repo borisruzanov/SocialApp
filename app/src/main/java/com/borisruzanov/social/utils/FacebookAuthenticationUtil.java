@@ -1,4 +1,4 @@
-package com.borisruzanov.social.ui;
+package com.borisruzanov.social.utils;
 
 
 import android.content.Intent;
@@ -29,10 +29,12 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-    public class FacebookLoginActivity extends BaseActivity implements
+    public class FacebookAuthenticationUtil extends BaseActivity implements
             View.OnClickListener{
 
-
+        //TODO Incapsulate all Facebook Auth methods to another class
+        //TODO Create Module in Dagger for Facebook Auth
+        //TODO Create Component in Dagger for Facebook Auth
 
     //    keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Boris\.android\debug.keystore" | "D:\OpenSslLibrary\bin\openssl" sha1 -binary | "D:\OpenSslLibrary\bin\openssl" base64
         private static final String TAG = "FacebookLogin";
@@ -136,7 +138,7 @@ import com.google.firebase.auth.FirebaseUser;
             AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
             Log.v(TAG, "AuthCredential: " + credential);
             mAuth.signInWithCredential(credential)
-                    .addOnCompleteListener(FacebookLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(FacebookAuthenticationUtil.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -147,7 +149,7 @@ import com.google.firebase.auth.FirebaseUser;
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.v(TAG, "signInWithCredential:failure", task.getException());
-                                Toast.makeText(FacebookLoginActivity.this, "Authentication failed.",
+                                Toast.makeText(FacebookAuthenticationUtil.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                                 updateUI(null);
                             }

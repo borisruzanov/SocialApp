@@ -2,34 +2,48 @@ package com.borisruzanov.social.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.borisruzanov.social.R;
-import com.borisruzanov.social.mvp.view.ProfileSettingsActivity;
+import com.borisruzanov.social.base.BaseActivity;
+import com.borisruzanov.social.utils.FacebookAuthenticationUtil;
+import com.borisruzanov.social.utils.FirebaseAuthenticationUtil;
 
-public class AuthPage extends AppCompatActivity {
+import butterknife.BindView;
 
+public class AuthPage extends BaseActivity {
+
+    //TODO Create AuthPagePresenter
+    //TODO Create AuthPageView
+    //TODO Create AuthPage
+    //TODO Create Interactor
+    //TODO Create Repository
+    //TODO Intent to BoardActivity
+    //TODO Create BoardActivity
+    //TODO Create BoardActivity.xml
+    //TODO Implements methods for Google Authentication
+    //TODO Implements methods for Facebook Authentication
+
+    @BindView(R.id.status)
+    TextView mStatusTextView;
+
+    @BindView(R.id.google_btn)
     Button googleAuthBtn;
+
+    @BindView(R.id.facebook_btn)
     Button facebookAuthBtn;
-    Button phoneAuthBtn;
-    Button profilePageBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auth_activity);
 
-        googleAuthBtn = (Button) findViewById(R.id.google_btn);
-        facebookAuthBtn = (Button) findViewById(R.id.facebook_btn);
-        phoneAuthBtn = (Button) findViewById(R.id.phone_btn);
-        profilePageBtn = (Button) findViewById(R.id.btn_profile_page);
-
         googleAuthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent googleIntent = new Intent(AuthPage.this, GoogleSignInActivity.class);
+                Intent googleIntent = new Intent(AuthPage.this, FirebaseAuthenticationUtil.class);
                 startActivity(googleIntent);
             }
         });
@@ -37,24 +51,8 @@ public class AuthPage extends AppCompatActivity {
         facebookAuthBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent googleIntent = new Intent(AuthPage.this, FacebookLoginActivity.class);
+                Intent googleIntent = new Intent(AuthPage.this, FacebookAuthenticationUtil.class);
                 startActivity(googleIntent);
-            }
-        });
-
-        phoneAuthBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent googleIntent = new Intent(AuthPage.this, PhoneAuthActivity.class);
-                startActivity(googleIntent);
-            }
-        });
-
-        profilePageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent profileIntents = new Intent(AuthPage.this, ProfileSettingsActivity.class);
-                startActivity(profileIntents);
             }
         });
     }

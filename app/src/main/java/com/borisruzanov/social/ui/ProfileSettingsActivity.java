@@ -1,4 +1,4 @@
-package com.borisruzanov.social.mvp.view;
+package com.borisruzanov.social.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.borisruzanov.social.R;
-import com.borisruzanov.social.mvp.view.fragments.ProfileSettingsHeightFragment;
-import com.borisruzanov.social.mvp.view.fragments.ProfileSettingsKidsFragment;
+import com.borisruzanov.social.ui.fragments.ProfileSettingsHeightFragment;
+import com.borisruzanov.social.ui.fragments.ProfileSettingsKidsFragment;
 
 public class ProfileSettingsActivity extends AppCompatActivity{
 
@@ -25,6 +25,8 @@ public class ProfileSettingsActivity extends AppCompatActivity{
         fragmentHeight = new ProfileSettingsHeightFragment();
         fragmentKids = new ProfileSettingsKidsFragment();
         ft = getSupportFragmentManager().beginTransaction();
+
+        //Set animation
         ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_to_right);
         ft.replace(R.id.frame_layout_profile_settings, fragmentHeight);
         ft.addToBackStack(null);
@@ -36,6 +38,12 @@ public class ProfileSettingsActivity extends AppCompatActivity{
             public void onClick(View view) {
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_to_right);
+
+                if(fragmentHeight.isVisible()){
+                    ft.replace(R.id.frame_layout_profile_settings, fragmentKids);
+                }else{
+                    ft.replace(R.id.frame_layout_profile_settings, fragmentHeight);
+                }
                 ft.commit();
             }
         });

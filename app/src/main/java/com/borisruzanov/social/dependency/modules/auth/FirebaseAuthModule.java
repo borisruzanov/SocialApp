@@ -6,23 +6,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by Boris on 1/26/2018.
- */
-
 @Module
 public class FirebaseAuthModule {
 
-    FirebaseAuth firebaseAuth;
+    //Constructor we can use if in activity we will pass something into module to get some result
 
-    public FirebaseAuthModule(FirebaseAuth firebaseAuth) {
-        this.firebaseAuth = firebaseAuth;
-    }
-
+    // Add to AuthScope
+    // Parameter we could get from Component threw 'dependency' or module
     @AuthScope
     @Provides
-    FirebaseAuth provideFirebaseAuth(FirebaseAuth firebaseAuth){
-        return firebaseAuth;
+    FirebaseAuth provideFirebaseAuth(){
+        //realization of getting needed instance
+        return FirebaseAuth.getInstance();
     }
-    
 }

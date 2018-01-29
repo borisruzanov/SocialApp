@@ -1,4 +1,4 @@
-package com.borisruzanov.social.mvp.view.fragments;
+package com.borisruzanov.social.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

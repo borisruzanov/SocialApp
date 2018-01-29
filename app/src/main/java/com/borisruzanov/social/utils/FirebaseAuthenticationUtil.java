@@ -1,5 +1,4 @@
-package com.borisruzanov.social.ui;
-
+package com.borisruzanov.social.utils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.borisruzanov.social.App;
 import com.borisruzanov.social.R;
 import com.borisruzanov.social.dependency.components.DaggerFirebaseComponent;
 import com.borisruzanov.social.dependency.modules.auth.FirebaseAuthModule;
+import com.borisruzanov.social.dependency.modules.auth.GoogleAuthModule;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,10 +27,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import javax.inject.Inject;
 
-public class GoogleSignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class FirebaseAuthenticationUtil extends AppCompatActivity implements View.OnClickListener{
 
-//    @BindView(R.id.status) TextView mStatusTextView;
-//    @BindView(R.id.detail) TextView mDetailTextView;
+    //TODO Incapsulate all GoogleAuth to another class
+    //TODO Create Module in Dagger for Google Auth
+    //TODO Create Component in Dagger for Google Auth
 
     @Inject
     FirebaseAuth firebaseAuth;
@@ -53,8 +53,10 @@ public class GoogleSignInActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.auth_google_activity);
 
         DaggerFirebaseComponent.builder()
-                .appComponent(App.graph)
-                .authModule(new FirebaseAuthModule()).build().inject(this);
+                //.appComponent(App.graph)
+                .firebaseAuthModule(new FirebaseAuthModule())
+                .googleAuthModule(new GoogleAuthModule())
+                .build().inject(this);
 
         // Views
         mStatusTextView = findViewById(R.id.status);
@@ -77,7 +79,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements View.OnCl
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // [START initialize_auth]
-        firebaseAuth = FirebaseAuth.getInstance();
+        //firebaseAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
     }
 
@@ -112,6 +114,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements View.OnCl
             }
         }
     }
+
     // [END onactivityresult]
 
     // [START auth_with_google]
@@ -120,7 +123,28 @@ public class GoogleSignInActivity extends AppCompatActivity implements View.OnCl
         // [START_EXCLUDE silent]
 //        showProgressDialog();
         // [END_EXCLUDE]
-
+//
+//        Observable.just(GoogleAuthProvider.getCredential(acct.getIdToken(), null))
+//                .flatMap(credential -> Observable.just(firebaseAuth.signInWithCredential(credential)))
+//                .subscribe(task -> {
+//                    if(task.isComplete()) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "signInWithCredential:success");
+//                            FirebaseUser user = firebaseAuth.getCurrentUser();
+//                            updateUI(user);
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            Log.w(TAG, "signInWithCredential:failure");
+////                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+//                            updateUI(null);
+//                        }
+//                    }
+//                    else {
+//                        Log.w(TAG, "NOT COMPLETE");
+//
+//                    }
+//                });
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
