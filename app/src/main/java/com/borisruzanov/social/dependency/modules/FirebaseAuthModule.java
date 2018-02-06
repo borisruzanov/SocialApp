@@ -1,4 +1,4 @@
-package com.borisruzanov.social.dependency.modules.auth;
+package com.borisruzanov.social.dependency.modules;
 
 import com.borisruzanov.social.dependency.scopes.AuthScope;
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,6 +13,7 @@ public class FirebaseAuthModule {
 
     // Add to AuthScope
     // Parameter we could get from Component threw 'dependency' or module
+
     @AuthScope
     @Provides
     FirebaseAuth provideFirebaseAuth(){

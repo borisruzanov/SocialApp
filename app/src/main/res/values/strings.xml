@@ -83,4 +83,5 @@
     <string name="no">No</string>
     <string name="do_you_have_kids">Do you have kids?</string>
     <string name="next">Next</string>
+    <string name="email_auth">Email Auth</string>
 </resources>

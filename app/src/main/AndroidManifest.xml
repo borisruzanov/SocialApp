@@ -18,11 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".utils.FirebaseAuthenticationUtil" >
+        <activity android:name=".utils.GoogleAuthenticationUtil" >
         </activity>
-        <activity android:name=".ui.PhoneAuthActivity" >
+        <activity android:name=".ui.AccountsListActivity" >
         </activity>
         <activity android:name=".ui.ProfileSettingsActivity" >
+        </activity>
+        <activity android:name=".ui.EmailAuthActivity" >
         </activity>
 
         <activity android:name=".utils.FacebookAuthenticationUtil"

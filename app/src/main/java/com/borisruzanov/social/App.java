@@ -5,7 +5,6 @@ import android.app.Application;
 import com.borisruzanov.social.dependency.components.AppComponent;
 import com.borisruzanov.social.dependency.components.DaggerAppComponent;
 import com.borisruzanov.social.dependency.modules.AppContextModule;
-
 public class App extends Application {
 
     //Initialize Application graph
